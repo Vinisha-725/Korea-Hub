@@ -38,7 +38,7 @@ export default function ExpensesPage() {
   const userSpending = userExpenses.reduce((sum, e) => sum + e.amount, 0);
 
   return (
-    <div className="p-4 md:p-8 max-w-6xl mx-auto">
+    <div className="p-4 md:p-8 max-w-6xl mx-auto animate-in">
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-2xl font-semibold mb-1">Expenses</h1>
