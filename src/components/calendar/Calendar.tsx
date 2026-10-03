@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, addMonths, subMonths } from 'date-fns';
 import { ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -22,8 +22,12 @@ export function Calendar() {
   const [eventTitle, setEventTitle] = useState('');
   const [eventType, setEventType] = useState<'class' | 'task' | 'trip' | 'other'>('task');
   const [eventTime, setEventTime] = useState('');
+  const [refreshKey, setRefreshKey] = useState(0);
+  const [events, setEvents] = useState<CalendarEvent[]>([]);
 
-  const events = mockStore.getCalendarEvents();
+  useEffect(() => {
+    setEvents(mockStore.getCalendarEvents());
+  }, [refreshKey]);
 
   const monthStart = startOfMonth(currentMonth);
   const monthEnd = endOfMonth(currentMonth);
@@ -58,7 +62,7 @@ export function Calendar() {
     setEventTitle('');
     setEventType('task');
     setEventTime('');
-    router.refresh();
+    setRefreshKey(prev => prev + 1);
   };
 
   const getEventsForDate = (date: Date) => {
@@ -157,7 +161,7 @@ export function Calendar() {
                         checked={event.completed}
                         onChange={() => {
                           mockStore.updateCalendarEvent(event.id, { completed: !event.completed });
-                          router.refresh();
+                          setRefreshKey(prev => prev + 1);
                         }}
                         className="h-4 w-4"
                       />
@@ -175,7 +179,7 @@ export function Calendar() {
                       size="sm"
                       onClick={() => {
                         mockStore.deleteCalendarEvent(event.id);
-                        router.refresh();
+                        setRefreshKey(prev => prev + 1);
                       }}
                     >
                       Delete
