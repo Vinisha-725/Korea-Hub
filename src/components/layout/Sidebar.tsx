@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Home, Wallet, Calendar, CheckSquare, MapPin, Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { ThemeToggle } from '@/components/theme/ThemeToggle';
 
 const navItems = [
   { href: '/', label: 'Overview', icon: Home },
@@ -21,10 +22,11 @@ export function Sidebar() {
 
   return (
     <aside className="hidden md:flex flex-col w-64 border-r bg-card h-screen fixed left-0 top-0">
-      <div className="p-6 border-b">
+      <div className="p-6 border-b flex items-center justify-between">
         <h1 className="text-xl font-semibold flex items-center gap-2">
           🇰🇷 Korea Hub
         </h1>
+        <ThemeToggle />
       </div>
       <nav className="flex-1 p-4">
         <ul className="space-y-1">

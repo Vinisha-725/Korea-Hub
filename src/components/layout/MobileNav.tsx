@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Home, Wallet, Calendar, CheckSquare, MapPin, Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { ThemeToggle } from '@/components/theme/ThemeToggle';
 
 const navItems = [
   { href: '/', label: 'Overview', icon: Home },
@@ -19,7 +20,7 @@ export function MobileNav() {
 
   return (
     <nav className="md:hidden fixed bottom-0 left-0 right-0 border-t bg-card z-50">
-      <div className="flex justify-around">
+      <div className="flex justify-around items-center">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href;
@@ -39,6 +40,9 @@ export function MobileNav() {
             </Link>
           );
         })}
+        <div className="flex flex-col items-center gap-1 px-3 py-2">
+          <ThemeToggle />
+        </div>
       </div>
     </nav>
   );

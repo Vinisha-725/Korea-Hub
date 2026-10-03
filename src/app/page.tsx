@@ -93,19 +93,39 @@ export default function Dashboard() {
       <div className="grid gap-6 md:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>Next class</CardTitle>
+            <CardTitle>Quick Actions</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-muted-foreground">Coming soon</p>
+            <div className="space-y-2">
+              <a href="/expenses" className="block p-3 rounded-lg bg-muted hover:bg-muted/80 transition-colors">
+                <div className="font-medium">Add Expense</div>
+                <div className="text-sm text-muted-foreground">Track your spending</div>
+              </a>
+              <a href="/calendar" className="block p-3 rounded-lg bg-muted hover:bg-muted/80 transition-colors">
+                <div className="font-medium">View Calendar</div>
+                <div className="text-sm text-muted-foreground">Check your schedule</div>
+              </a>
+            </div>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader>
-            <CardTitle>Pending tasks</CardTitle>
+            <CardTitle>Recent Activity</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-muted-foreground">Coming soon</p>
+            {expenses.length === 0 ? (
+              <p className="text-muted-foreground">No expenses yet</p>
+            ) : (
+              <div className="space-y-2">
+                {expenses.slice(0, 3).map((expense) => (
+                  <div key={expense.id} className="flex justify-between text-sm">
+                    <span>{expense.description}</span>
+                    <span className="font-medium">₩{expense.amount.toLocaleString()}</span>
+                  </div>
+                ))}
+              </div>
+            )}
           </CardContent>
         </Card>
       </div>
