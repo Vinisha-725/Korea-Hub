@@ -55,6 +55,11 @@ class MockStore {
     return member;
   }
 
+  deleteMember(id: string): void {
+    this.members = this.members.filter((m) => m.id !== id);
+    saveToStorage('korea-members', this.members);
+  }
+
   // Vendors
   getVendors(): Vendor[] {
     return this.vendors;
@@ -69,6 +74,11 @@ class MockStore {
     this.vendors.push(vendor);
     saveToStorage('korea-vendors', this.vendors);
     return vendor;
+  }
+
+  deleteVendor(id: string): void {
+    this.vendors = this.vendors.filter((v) => v.id !== id);
+    saveToStorage('korea-vendors', this.vendors);
   }
 
   // Payment Methods
@@ -87,6 +97,11 @@ class MockStore {
     return method;
   }
 
+  deletePaymentMethod(id: string): void {
+    this.paymentMethods = this.paymentMethods.filter((pm) => pm.id !== id);
+    saveToStorage('korea-payment-methods', this.paymentMethods);
+  }
+
   // Categories
   getCategories(): Category[] {
     return this.categories;
@@ -101,6 +116,11 @@ class MockStore {
     this.categories.push(category);
     saveToStorage('korea-categories', this.categories);
     return category;
+  }
+
+  deleteCategory(id: string): void {
+    this.categories = this.categories.filter((c) => c.id !== id);
+    saveToStorage('korea-categories', this.categories);
   }
 
   // Expenses

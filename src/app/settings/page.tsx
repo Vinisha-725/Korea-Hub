@@ -45,17 +45,23 @@ export default function SettingsPage() {
     switch (activeTab) {
       case 'members':
         // Don't allow deleting all members
-        if (members.length <= 1) return;
+        if (members.length <= 1) {
+          alert('Cannot delete the last member');
+          return;
+        }
+        mockStore.deleteMember(id);
         break;
       case 'vendors':
+        mockStore.deleteVendor(id);
         break;
       case 'payment':
+        mockStore.deletePaymentMethod(id);
         break;
       case 'categories':
+        mockStore.deleteCategory(id);
         break;
     }
-    // For now, we'd need to add delete methods to mock store
-    alert('Delete functionality coming soon');
+    router.refresh();
   };
 
   const tabs = [
